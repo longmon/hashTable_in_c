@@ -4,13 +4,15 @@
 
 int main()
 {
-	htItem *item[3];
-	htInit(item, 3);
+	htItem *item[101];
+	htInit(item, 101);
 
 	htSet("longmon",100,item);
 	htSet("natalie", 1000,item);
 	htSet("xiaoqiong",99, item);
-	
+
+	print_hashTable(item);	
+
 	printf("Geting ...\n");
 
 	htItem *tmp = htGet("longmon",item);
@@ -30,8 +32,13 @@ int main()
 	htDel("natalie", item);
 
 	printf("deleted \n");
+
+	print_hashTable(item);
 	
 	htItem *tmp3 = htGet("natalie",item);
-
-        printf("Key %s => %d\n", tmp3->key_string, tmp3->fid);
+	
+	printf("tmp3 pointer:%u\n", tmp3);
+	if( tmp3->key_string ) {
+	        printf("Key %s => %d\n", tmp3->key_string, tmp3->fid);
+	}
 }
