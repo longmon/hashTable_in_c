@@ -35,4 +35,6 @@ uint htLen( htItem **ht);
 
 /** init the hashTable */
 void htInit( htItem **ht, uint length);
+
+void print_hashTable( htItem **ht );
 #endif

@@ -28,6 +28,7 @@ htItem* htGet( char *key, htItem **ht ){
         while( item )
         {
                 if( strcmp(key, item->key_string) == 0 ){
+			return item;
 			tmp->fid = item->fid;
 			tmp->key_string = item->key_string;
                         return tmp;
@@ -64,6 +65,7 @@ void htInit( htItem **ht, uint length ){
 	ht[0]->fid = length;
 }
 
+/** delete one element of hashtable */
 int htDel(char *key, htItem **ht){
 	uint i = htIndex(key, ht);
 	htItem *item = ht[i];
@@ -79,6 +81,36 @@ int htDel(char *key, htItem **ht){
 	return -1;
 }
 
+/** get element number in the hashtable */
 uint htLen(htItem **ht){
-	return 0;
+	uint alength = ht[0]->fid;
+	uint i, length = 0;
+	for(i = 1; i < alength; i++ ){
+		if( ht[i]->next ) {
+			length++;
+		}
+	}
+	return length;
+}
+
+/** get capacity of hashtable */
+uint htCapacity( htItem **ht)
+{	
+	return ht[0]->fid;
+}	
+
+void print_hashTable( htItem **ht )
+{
+	uint length = ht[0]->fid;
+	uint i;
+	htItem *item;
+	for( i = 1; i < length; i++ )
+	{
+		item = ht[i]->next;
+		while(item)
+		{
+			printf("%s => %d\n",item->key_string, item->fid);
+			item = item->next;
+		}
+	}
 }
